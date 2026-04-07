@@ -237,7 +237,7 @@
     .nav-links .has-dropdown { position: relative; }
     .nav-dropdown {
       position: absolute;
-      top: calc(100% + 18px);
+      top: 100%;
       left: 50%;
       transform: translateX(-50%);
       background: var(--coal-mid);
@@ -249,6 +249,15 @@
       z-index: 200;
     }
     .has-dropdown:hover .nav-dropdown { display: flex; }
+    /* Invisible bridge fills gap between link and dropdown so hover stays active */
+    .has-dropdown::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      height: 12px;
+    }
     .nav-dropdown a {
       font-family: 'Outfit', sans-serif;
       font-size: 11px;
