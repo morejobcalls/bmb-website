@@ -16,7 +16,7 @@
   <meta property="og:description" content="Build your dream custom home in 8–12 weeks for 25% less than traditional construction. Plymouth County's 4th-generation modular home experts.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.bivianomodularbuilders.com/">
-  <meta property="og:image" content="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200&q=80">
   <meta property="og:locale" content="en_US">
   <meta property="og:site_name" content="Biviano Modular Builders">
 
@@ -24,7 +24,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Biviano Modular Builders | Custom Homes in 12 Weeks | Marshfield, MA">
   <meta name="twitter:description" content="Build your dream custom home in 8–12 weeks for 25% less. Marshfield, MA.">
-  <meta name="twitter:image" content="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200&q=80">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -233,6 +233,36 @@
     }
     .nav-cta:hover { background: var(--stone-light); }
 
+    /* Towns Dropdown */
+    .nav-links .has-dropdown { position: relative; }
+    .nav-dropdown {
+      position: absolute;
+      top: calc(100% + 18px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--coal-mid);
+      border-top: 2px solid var(--blue);
+      min-width: 190px;
+      display: none;
+      flex-direction: column;
+      padding: 6px 0;
+      z-index: 200;
+    }
+    .has-dropdown:hover .nav-dropdown { display: flex; }
+    .nav-dropdown a {
+      font-family: 'Outfit', sans-serif;
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      padding: 10px 20px;
+      transition: color 0.2s ease, background 0.2s ease;
+      white-space: nowrap;
+    }
+    .nav-dropdown a:hover { color: var(--white); background: rgba(255,255,255,0.05); }
+
     /* Hamburger */
     .nav-hamburger {
       display: none;
@@ -293,6 +323,30 @@
       font-size: 18px !important;
     }
     .mobile-cta:hover { background: var(--stone-light) !important; }
+    .mobile-section-label {
+      font-family: 'Outfit', sans-serif;
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--blue);
+      padding: 24px 0 8px;
+      border-top: 1px solid var(--rule-dark);
+      margin-top: 8px;
+    }
+    .mobile-town-link {
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      transition: color 0.2s ease;
+    }
+    .mobile-town-link:hover { color: var(--white); }
 
     /* ─────────────────────────────
        HERO
@@ -1568,6 +1622,19 @@
     <li><a href="#process">Process</a></li>
     <li><a href="#stories">Stories</a></li>
     <li><a href="#faq">FAQ</a></li>
+    <li class="has-dropdown">
+      <a href="#" aria-haspopup="true" aria-expanded="false">Service Areas</a>
+      <div class="nav-dropdown" role="menu">
+        <a href="/marshfield/" role="menuitem">Marshfield</a>
+        <a href="/scituate/" role="menuitem">Scituate</a>
+        <a href="/humarock/" role="menuitem">Humarock</a>
+        <a href="/duxbury/" role="menuitem">Duxbury</a>
+        <a href="/hanover/" role="menuitem">Hanover</a>
+        <a href="/pembroke/" role="menuitem">Pembroke</a>
+        <a href="/norwell/" role="menuitem">Norwell</a>
+        <a href="/hingham/" role="menuitem">Hingham</a>
+      </div>
+    </li>
   </ul>
 
   <a href="#consult" class="nav-cta">Begin Your Build</a>
@@ -1584,6 +1651,15 @@
   <a href="#process">Our Process</a>
   <a href="#stories">Client Stories</a>
   <a href="#faq">FAQ</a>
+  <div class="mobile-section-label">Service Areas</div>
+  <a href="/marshfield/" class="mobile-town-link">Marshfield</a>
+  <a href="/scituate/" class="mobile-town-link">Scituate</a>
+  <a href="/humarock/" class="mobile-town-link">Humarock</a>
+  <a href="/duxbury/" class="mobile-town-link">Duxbury</a>
+  <a href="/hanover/" class="mobile-town-link">Hanover</a>
+  <a href="/pembroke/" class="mobile-town-link">Pembroke</a>
+  <a href="/norwell/" class="mobile-town-link">Norwell</a>
+  <a href="/hingham/" class="mobile-town-link">Hingham</a>
   <a href="#consult" class="mobile-cta">Begin Your Build →</a>
 </nav>
 
@@ -1593,7 +1669,7 @@
 <section class="hero" aria-label="Hero section">
   <div class="hero-bg" aria-hidden="true">
     <img
-      src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=80&auto=format&fit=crop"
+      src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1600&q=80&auto=format&fit=crop"
       alt=""
       fetchpriority="high"
     >
