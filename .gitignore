@@ -1,0 +1,9 @@
+# macOS
+.DS_Store
+._*
+.AppleDouble
+.LSOverride
+__MACOSX/
+
+# Examples / design references (not production code)
+Examples/
