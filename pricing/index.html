@@ -1459,7 +1459,8 @@
     ───────────────────────────── */
     .calc-section {
       padding: 96px 40px;
-      background: #0d0d0c;
+      background: var(--coal);
+      border-top: 1px solid var(--rule-dark);
     }
     .calc-inner {
       max-width: 840px;
@@ -1820,6 +1821,118 @@
   </section>
 
   <!-- ═══════════════════════════════════════════
+       SECTION 3B — ESTIMATE CALCULATOR
+  ═══════════════════════════════════════════ -->
+  <section id="calculator" class="calc-section">
+    <div class="calc-inner">
+      <div class="calc-header reveal">
+        <span class="overline">Instant Ballpark</span>
+        <h2 class="section-title" style="color: var(--white);">What Would Your Home <span class="em">Cost?</span></h2>
+        <p class="calc-intro">Enter your estimated square footage. We'll calculate a personalized ballpark and email you the full breakdown — including exactly how we arrive at your number.</p>
+      </div>
+
+      <div class="calc-card reveal reveal-d1">
+        <!-- Step 1 — Square footage -->
+        <div class="calc-step active" id="cStep1">
+          <div class="calc-step-badge">
+            <span class="calc-pill">Step 1 of 2</span>
+            <span class="calc-step-label">Enter your square footage</span>
+          </div>
+          <h3 class="calc-step-title">Instant Modular Home Estimate</h3>
+          <p class="calc-step-desc">Enter a rough square footage. We'll calculate your ballpark and email you a detailed breakdown — line by line.</p>
+          <div class="calc-input-row">
+            <div class="calc-field">
+              <label class="calc-label" for="calcSf">Estimated Square Footage</label>
+              <input class="calc-input" id="calcSf" type="number" min="0" step="1" placeholder="e.g. 2,000">
+              <span class="calc-hint">Standard foundation ($70,000) and deck allowance ($25,000) are included in the estimate.</span>
+              <span class="calc-sf-error" id="calcSfErr">Please enter a square footage to continue.</span>
+            </div>
+          </div>
+          <div class="calc-btns">
+            <button id="calcGoStep2" class="btn-primary">Get My Estimate →</button>
+          </div>
+          <p class="calc-disclaimer">Ballpark estimate only — land, utilities, permitting, septic/sewer, driveway, and site work are not included.</p>
+        </div>
+
+        <!-- Step 2 — Contact info -->
+        <div class="calc-step" id="cStep2">
+          <div class="calc-step-badge">
+            <span class="calc-pill">Step 2 of 2</span>
+            <span class="calc-step-label">Where should we send your estimate?</span>
+          </div>
+          <h3 class="calc-step-title">Send Me My Estimate</h3>
+          <p class="calc-step-desc">We'll email you a detailed breakdown. If you want to talk through the numbers with Mike, he's a phone call away.</p>
+          <div class="calc-grid">
+            <div class="calc-field">
+              <label class="calc-label" for="calcFirstName">First Name</label>
+              <input class="calc-input" id="calcFirstName" type="text" autocomplete="given-name" placeholder="First name">
+            </div>
+            <div class="calc-field">
+              <label class="calc-label" for="calcLastName">Last Name</label>
+              <input class="calc-input" id="calcLastName" type="text" autocomplete="family-name" placeholder="Last name">
+            </div>
+            <div class="calc-field">
+              <label class="calc-label" for="calcEmail">Email</label>
+              <input class="calc-input" id="calcEmail" type="email" autocomplete="email" placeholder="you@email.com">
+              <span class="calc-error" id="calcEmailErr">Please enter a valid email.</span>
+            </div>
+            <div class="calc-field">
+              <label class="calc-label" for="calcPhone">Phone</label>
+              <input class="calc-input" id="calcPhone" type="tel" autocomplete="tel" placeholder="(617) 555-0100">
+              <span class="calc-error" id="calcPhoneErr">Please enter a valid phone number.</span>
+            </div>
+          </div>
+          <div class="calc-btns">
+            <button id="calcSubmit" class="btn-primary">Send My Estimate →</button>
+            <button id="calcBack" class="calc-btn-back" type="button">← Back</button>
+          </div>
+          <p class="calc-disclaimer">By submitting, you agree we may contact you about your estimate. We don't spam.</p>
+        </div>
+
+        <!-- Step 3 — Confirmation -->
+        <div class="calc-step" id="cStep3">
+          <div class="calc-confirm-icon">✓</div>
+          <h3 class="calc-step-title">Estimate Requested</h3>
+          <div class="calc-confirm-box">
+            <p><strong>We received your information.</strong> Your estimate will arrive at <strong id="calcConfirmEmail">your email</strong> within a few minutes — often immediately.</p>
+            <p class="calc-hint" style="margin-top: 12px; display: block;">If you don't see it, check spam or promotions. <strong style="color:rgba(255,255,255,0.5);">Reminder:</strong> Land, utilities, septic/sewer, driveway, and permitting are not included in this estimate.</p>
+          </div>
+          <div class="calc-confirm-cta">
+            <a href="#consult" class="btn-primary">Schedule a Free Consultation →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formula transparency row -->
+      <div class="calc-formula reveal reveal-d2">
+        <div class="calc-formula-title">How We Calculate Your Estimate</div>
+        <div class="calc-formula-items">
+          <div class="calc-formula-item">
+            <div class="calc-formula-num">$250</div>
+            <div class="calc-formula-label">per sq ft (home)</div>
+          </div>
+          <div class="calc-formula-plus">+</div>
+          <div class="calc-formula-item">
+            <div class="calc-formula-num">$70K</div>
+            <div class="calc-formula-label">foundation allowance</div>
+          </div>
+          <div class="calc-formula-plus">+</div>
+          <div class="calc-formula-item">
+            <div class="calc-formula-num">$25K</div>
+            <div class="calc-formula-label">deck allowance</div>
+          </div>
+          <div class="calc-formula-plus">=</div>
+          <div class="calc-formula-item calc-formula-total">
+            <div class="calc-formula-num">Your Number</div>
+            <div class="calc-formula-label">ballpark total</div>
+          </div>
+        </div>
+        <p class="calc-formula-note">Land, utilities, septic/sewer, driveway, site work, and permitting are separate. For a complete, site-specific number, <a href="#consult">schedule a free consultation with Mike</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
        SECTION 4 — WHAT'S INCLUDED
   ═══════════════════════════════════════════ -->
   <section class="included-section">
@@ -2142,118 +2255,6 @@
           <div class="savings-stat-num">8–12 Wks</div>
           <div class="savings-stat-label">Move-in timeline<br>track record</div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════
-       SECTION 8B — ESTIMATE CALCULATOR
-  ═══════════════════════════════════════════ -->
-  <section id="calculator" class="calc-section">
-    <div class="calc-inner">
-      <div class="calc-header reveal">
-        <span class="overline">Instant Ballpark</span>
-        <h2 class="section-title" style="color: var(--white);">What Would Your Home <span class="em">Cost?</span></h2>
-        <p class="calc-intro">Enter your estimated square footage. We'll calculate a personalized ballpark and email you the full breakdown — including exactly how we arrive at your number.</p>
-      </div>
-
-      <div class="calc-card reveal reveal-d1">
-        <!-- Step 1 — Square footage -->
-        <div class="calc-step active" id="cStep1">
-          <div class="calc-step-badge">
-            <span class="calc-pill">Step 1 of 2</span>
-            <span class="calc-step-label">Enter your square footage</span>
-          </div>
-          <h3 class="calc-step-title">Instant Modular Home Estimate</h3>
-          <p class="calc-step-desc">Enter a rough square footage. We'll calculate your ballpark and email you a detailed breakdown — line by line.</p>
-          <div class="calc-input-row">
-            <div class="calc-field">
-              <label class="calc-label" for="calcSf">Estimated Square Footage</label>
-              <input class="calc-input" id="calcSf" type="number" min="0" step="1" placeholder="e.g. 2,000">
-              <span class="calc-hint">Standard foundation ($70,000) and deck allowance ($25,000) are included in the estimate.</span>
-              <span class="calc-sf-error" id="calcSfErr">Please enter a square footage to continue.</span>
-            </div>
-          </div>
-          <div class="calc-btns">
-            <button id="calcGoStep2" class="btn-primary">Get My Estimate →</button>
-          </div>
-          <p class="calc-disclaimer">Ballpark estimate only — land, utilities, permitting, septic/sewer, driveway, and site work are not included.</p>
-        </div>
-
-        <!-- Step 2 — Contact info -->
-        <div class="calc-step" id="cStep2">
-          <div class="calc-step-badge">
-            <span class="calc-pill">Step 2 of 2</span>
-            <span class="calc-step-label">Where should we send your estimate?</span>
-          </div>
-          <h3 class="calc-step-title">Send Me My Estimate</h3>
-          <p class="calc-step-desc">We'll email you a detailed breakdown. If you want to talk through the numbers with Mike, he's a phone call away.</p>
-          <div class="calc-grid">
-            <div class="calc-field">
-              <label class="calc-label" for="calcFirstName">First Name</label>
-              <input class="calc-input" id="calcFirstName" type="text" autocomplete="given-name" placeholder="First name">
-            </div>
-            <div class="calc-field">
-              <label class="calc-label" for="calcLastName">Last Name</label>
-              <input class="calc-input" id="calcLastName" type="text" autocomplete="family-name" placeholder="Last name">
-            </div>
-            <div class="calc-field">
-              <label class="calc-label" for="calcEmail">Email</label>
-              <input class="calc-input" id="calcEmail" type="email" autocomplete="email" placeholder="you@email.com">
-              <span class="calc-error" id="calcEmailErr">Please enter a valid email.</span>
-            </div>
-            <div class="calc-field">
-              <label class="calc-label" for="calcPhone">Phone</label>
-              <input class="calc-input" id="calcPhone" type="tel" autocomplete="tel" placeholder="(617) 555-0100">
-              <span class="calc-error" id="calcPhoneErr">Please enter a valid phone number.</span>
-            </div>
-          </div>
-          <div class="calc-btns">
-            <button id="calcSubmit" class="btn-primary">Send My Estimate →</button>
-            <button id="calcBack" class="calc-btn-back" type="button">← Back</button>
-          </div>
-          <p class="calc-disclaimer">By submitting, you agree we may contact you about your estimate. We don't spam.</p>
-        </div>
-
-        <!-- Step 3 — Confirmation -->
-        <div class="calc-step" id="cStep3">
-          <div class="calc-confirm-icon">✓</div>
-          <h3 class="calc-step-title">Estimate Requested</h3>
-          <div class="calc-confirm-box">
-            <p><strong>We received your information.</strong> Your estimate will arrive at <strong id="calcConfirmEmail">your email</strong> within a few minutes — often immediately.</p>
-            <p class="calc-hint" style="margin-top: 12px; display: block;">If you don't see it, check spam or promotions. <strong style="color:rgba(255,255,255,0.5);">Reminder:</strong> Land, utilities, septic/sewer, driveway, and permitting are not included in this estimate.</p>
-          </div>
-          <div class="calc-confirm-cta">
-            <a href="#consult" class="btn-primary">Schedule a Free Consultation →</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Formula transparency row -->
-      <div class="calc-formula reveal reveal-d2">
-        <div class="calc-formula-title">How We Calculate Your Estimate</div>
-        <div class="calc-formula-items">
-          <div class="calc-formula-item">
-            <div class="calc-formula-num">$250</div>
-            <div class="calc-formula-label">per sq ft (home)</div>
-          </div>
-          <div class="calc-formula-plus">+</div>
-          <div class="calc-formula-item">
-            <div class="calc-formula-num">$70K</div>
-            <div class="calc-formula-label">foundation allowance</div>
-          </div>
-          <div class="calc-formula-plus">+</div>
-          <div class="calc-formula-item">
-            <div class="calc-formula-num">$25K</div>
-            <div class="calc-formula-label">deck allowance</div>
-          </div>
-          <div class="calc-formula-plus">=</div>
-          <div class="calc-formula-item calc-formula-total">
-            <div class="calc-formula-num">Your Number</div>
-            <div class="calc-formula-label">ballpark total</div>
-          </div>
-        </div>
-        <p class="calc-formula-note">Land, utilities, septic/sewer, driveway, site work, and permitting are separate. For a complete, site-specific number, <a href="#consult">schedule a free consultation with Mike</a>.</p>
       </div>
     </div>
   </section>
