@@ -936,7 +936,7 @@
     }
     .p-step-title {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 20px;
+      font-size: 28px;
       letter-spacing: 0.06em;
       color: var(--white);
       margin-bottom: 12px;
@@ -944,10 +944,10 @@
     }
     .p-step-desc {
       font-family: 'Outfit', sans-serif;
-      font-size: 12px;
+      font-size: 16px;
       font-weight: 300;
       line-height: 1.75;
-      color: rgba(255,255,255,0.32);
+      color: rgba(255,255,255,0.55);
     }
 
     /* ─────────────────────────────
@@ -1594,9 +1594,165 @@
       .adv-tile { padding: 36px 24px; }
       .t-card { padding: 36px 28px; }
       .cta-img-side { min-height: 360px; }
+      .social-section { padding: 72px 24px; }
+      .social-cards { grid-template-columns: 1fr; }
     }
   </style>
-</head>
+
+  <style>
+    /* ─────────────────────────────
+       SOCIAL PROOF / RECENT WORK
+    ───────────────────────────── */
+    .social-section {
+      background: var(--coal-mid);
+      padding: 100px 56px;
+    }
+    .social-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .social-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 56px;
+      flex-wrap: wrap;
+    }
+    .social-fb-link {
+      font-family: 'Outfit', sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--blue);
+      text-decoration: none;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+    .social-fb-link:hover { opacity: 0.7; }
+    .social-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 56px;
+    }
+    .social-card {
+      background: var(--coal-light);
+      border: 1px solid var(--rule-dark);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .social-card-photo {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: var(--coal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .social-card-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.5) brightness(0.65);
+    }
+    .social-card-photo-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255,255,255,0.18);
+    }
+    .social-card-photo-placeholder svg {
+      width: 36px;
+      height: 36px;
+      opacity: 0.3;
+    }
+    .social-card-photo-placeholder span {
+      font-family: 'Outfit', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .social-card-body {
+      padding: 20px 22px 22px;
+    }
+    .social-card-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .social-card-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 14px;
+      color: var(--white);
+      flex-shrink: 0;
+    }
+    .social-card-author {
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--white);
+      line-height: 1.2;
+    }
+    .social-card-date {
+      font-family: 'Outfit', sans-serif;
+      font-size: 11px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.3);
+    }
+    .social-card-text {
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 16px;
+    }
+    .social-card-tag {
+      display: inline-block;
+      font-family: 'Outfit', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      border: 1px solid rgba(74,144,196,0.35);
+      padding: 3px 9px;
+      border-radius: 999px;
+    }
+    .social-cta-row {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .social-cta-note {
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.35);
+    }
+    .social-cta-note a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+    .social-cta-note a:hover { text-decoration: underline; }
+    @media (max-width: 900px) {
+      .social-cards { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
 <body>
 
 <!-- ══════════════════════════════════════════
@@ -2047,6 +2203,93 @@
       <a href="https://reviews.birdeye.com/biviano-general-contracting-llc-167479265849097" target="_blank" rel="noopener noreferrer">
         View all 21 verified five-star reviews on Birdeye →
       </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SOCIAL PROOF / RECENT WORK
+══════════════════════════════════════════ -->
+<section class="social-section" aria-label="Recent projects">
+  <div class="social-inner">
+    <div class="social-header reveal">
+      <div>
+        <span class="overline overline-light">From the Job Site</span>
+        <h2 class="section-title" style="color: var(--white); margin-top: 8px;">Recent <span class="em">Work.</span></h2>
+      </div>
+      <a href="https://www.facebook.com/Bivianocontracting/" target="_blank" rel="noopener noreferrer" class="social-fb-link">Follow on Facebook →</a>
+    </div>
+
+    <div class="social-cards">
+
+      <!-- Card 1 — Joanne Keogh Humarock build -->
+      <div class="social-card reveal">
+        <div class="social-card-photo">
+          <div class="social-card-photo-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo coming soon</span>
+          </div>
+        </div>
+        <div class="social-card-body">
+          <div class="social-card-meta">
+            <div class="social-card-avatar">MB</div>
+            <div>
+              <div class="social-card-author">Biviano Contracting</div>
+              <div class="social-card-date">Humarock, MA</div>
+            </div>
+          </div>
+          <p class="social-card-text">"Once the house was placed on piling it was completed 10 and a half weeks later and we moved into our new dream home." — Joanne Keogh, custom modular home in Humarock. Coastal build on wood-driven piles. Fully custom design from the ground up.</p>
+          <span class="social-card-tag">Coastal Modular · Humarock</span>
+        </div>
+      </div>
+
+      <!-- Card 2 — Marshfield spec home -->
+      <div class="social-card reveal reveal-d1">
+        <div class="social-card-photo">
+          <div class="social-card-photo-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo coming soon</span>
+          </div>
+        </div>
+        <div class="social-card-body">
+          <div class="social-card-meta">
+            <div class="social-card-avatar">MB</div>
+            <div>
+              <div class="social-card-author">Biviano Contracting</div>
+              <div class="social-card-date">Marshfield, MA</div>
+            </div>
+          </div>
+          <p class="social-card-text">2,450 sq ft custom modular spec home — red cedar siding, Anderson 400 series windows, 2x6 full-frame construction, 110 mph wind zone compliant. Sold for $525,000. Built to the same spec as anything in Plymouth County.</p>
+          <span class="social-card-tag">2,450 sq ft · Marshfield</span>
+        </div>
+      </div>
+
+      <!-- Card 3 — Teardown + rebuild -->
+      <div class="social-card reveal reveal-d2">
+        <div class="social-card-photo">
+          <div class="social-card-photo-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo coming soon</span>
+          </div>
+        </div>
+        <div class="social-card-body">
+          <div class="social-card-meta">
+            <div class="social-card-avatar">MB</div>
+            <div>
+              <div class="social-card-author">Biviano Contracting</div>
+              <div class="social-card-date">Marshfield, MA</div>
+            </div>
+          </div>
+          <p class="social-card-text">Teardown + full modular rebuild. 4,200 sq ft with detached garage — red cedar, Anderson 400 windows, wind zone compliant. Demo, site prep, and new modular home delivered as one seamless project. Sold for $845,000.</p>
+          <span class="social-card-tag">4,200 sq ft · Teardown &amp; Rebuild</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="social-cta-row reveal">
+      <a href="#consult" class="btn-primary">Schedule Your Free Consultation →</a>
+      <p class="social-cta-note">Have photos from your own BMB build? <a href="https://www.facebook.com/Bivianocontracting/" target="_blank" rel="noopener noreferrer">Tag us on Facebook.</a></p>
     </div>
   </div>
 </section>
