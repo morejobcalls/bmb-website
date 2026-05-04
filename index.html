@@ -1596,10 +1596,77 @@
       .cta-img-side { min-height: 360px; }
       .social-section { padding: 72px 24px; }
       .social-cards { grid-template-columns: 1fr; }
+      .towns-grid { grid-template-columns: 1fr 1fr; }
     }
   </style>
 
   <style>
+    /* ─────────────────────────────
+       SERVICE AREAS
+    ───────────────────────────── */
+    .towns-section {
+      background: var(--coal);
+      padding: 100px 56px;
+      border-top: 1px solid var(--rule-dark);
+    }
+    .towns-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .towns-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 56px;
+      flex-wrap: wrap;
+    }
+    .towns-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+    }
+    .town-card {
+      background: var(--coal-mid);
+      padding: 36px 28px;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border-top: 2px solid transparent;
+      transition: border-color 0.25s, background 0.25s;
+    }
+    .town-card:hover {
+      border-color: var(--blue);
+      background: var(--coal-light);
+    }
+    .town-card-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 26px;
+      letter-spacing: 0.06em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .town-card-label {
+      font-family: 'Outfit', sans-serif;
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+    }
+    .town-card-arrow {
+      font-size: 16px;
+      color: var(--blue);
+      margin-top: auto;
+      transition: transform 0.2s;
+    }
+    .town-card:hover .town-card-arrow { transform: translateX(4px); }
+    @media (max-width: 900px) {
+      .towns-section { padding: 80px 32px; }
+      .towns-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
     /* ─────────────────────────────
        SOCIAL PROOF / RECENT WORK
     ───────────────────────────── */
@@ -2290,6 +2357,63 @@
     <div class="social-cta-row reveal">
       <a href="#consult" class="btn-primary">Schedule Your Free Consultation →</a>
       <p class="social-cta-note">Have photos from your own BMB build? <a href="https://www.facebook.com/Bivianocontracting/" target="_blank" rel="noopener noreferrer">Tag us on Facebook.</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SERVICE AREAS
+══════════════════════════════════════════ -->
+<section class="towns-section" aria-labelledby="towns-heading">
+  <div class="towns-inner">
+    <div class="towns-header reveal">
+      <div>
+        <span class="overline overline-light">Plymouth County, MA</span>
+        <h2 class="section-title" id="towns-heading" style="color: var(--white); margin-top: 8px;">We Build In <span class="em">Your Town.</span></h2>
+      </div>
+      <p style="font-family:'Outfit',sans-serif; font-size:14px; font-weight:300; color:rgba(255,255,255,0.38); max-width:360px; line-height:1.75;">Each town page has local permitting notes, coastal zone info, and what to expect for your specific area.</p>
+    </div>
+    <div class="towns-grid">
+      <a href="/marshfield/" class="town-card reveal">
+        <span class="town-card-name">Marshfield</span>
+        <span class="town-card-label">Modular home builder</span>
+        <span class="town-card-arrow">→</span>
+      </a>
+      <a href="/scituate/" class="town-card reveal reveal-d1">
+        <span class="town-card-name">Scituate</span>
+        <span class="town-card-label">Modular home builder</span>
+        <span class="town-card-arrow">→</span>
+      </a>
+      <a href="/humarock/" class="town-card reveal reveal-d2">
+        <span class="town-card-name">Humarock</span>
+        <span class="town-card-label">Coastal modular specialist</span>
+        <span class="town-card-arrow">→</span>
+      </a>
+      <a href="/duxbury/" class="town-card reveal reveal-d3">
+        <span class="town-card-name">Duxbury</span>
+        <span class="town-card-label">Modular home builder</span>
+        <span class="town-card-arrow">→</span>
+      </a>
+      <a href="/hanover/" class="town-card reveal">
+        <span class="town-card-name">Hanover</span>
+        <span class="town-card-label">Modular home builder</span>
+        <span class="town-card-arrow">→</span>
+      </a>
+      <a href="/pembroke/" class="town-card reveal reveal-d1">
+        <span class="town-card-name">Pembroke</span>
+        <span class="town-card-label">Modular home builder</span>
+        <span class="town-card-arrow">→</span>
+      </a>
+      <a href="/norwell/" class="town-card reveal reveal-d2">
+        <span class="town-card-name">Norwell</span>
+        <span class="town-card-label">Modular home builder</span>
+        <span class="town-card-arrow">→</span>
+      </a>
+      <a href="/hingham/" class="town-card reveal reveal-d3">
+        <span class="town-card-name">Hingham</span>
+        <span class="town-card-label">Modular home builder</span>
+        <span class="town-card-arrow">→</span>
+      </a>
     </div>
   </div>
 </section>
