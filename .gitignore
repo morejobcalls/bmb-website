@@ -7,3 +7,4 @@ __MACOSX/
 
 # Examples / design references (not production code)
 Examples/
+.!*
