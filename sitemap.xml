@@ -4,57 +4,83 @@
   <!-- Homepage -->
   <url>
     <loc>https://www.bivianomodularbuilders.com/</loc>
-    <lastmod>2026-04-07</lastmod>
+    <lastmod>2026-05-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+  </url>
+
+  <!-- Core Pages -->
+  <url>
+    <loc>https://www.bivianomodularbuilders.com/why-modular/</loc>
+    <lastmod>2026-05-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.bivianomodularbuilders.com/process/</loc>
+    <lastmod>2026-05-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.bivianomodularbuilders.com/pricing/</loc>
+    <lastmod>2026-05-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.bivianomodularbuilders.com/gallery/</loc>
+    <lastmod>2026-05-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 
   <!-- Town Pages -->
   <url>
     <loc>https://www.bivianomodularbuilders.com/marshfield/</loc>
-    <lastmod>2026-04-07</lastmod>
+    <lastmod>2026-05-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.bivianomodularbuilders.com/scituate/</loc>
-    <lastmod>2026-04-07</lastmod>
+    <lastmod>2026-05-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.bivianomodularbuilders.com/humarock/</loc>
-    <lastmod>2026-04-07</lastmod>
+    <lastmod>2026-05-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.bivianomodularbuilders.com/duxbury/</loc>
-    <lastmod>2026-04-07</lastmod>
+    <lastmod>2026-05-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.bivianomodularbuilders.com/hanover/</loc>
-    <lastmod>2026-04-07</lastmod>
+    <lastmod>2026-05-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.bivianomodularbuilders.com/pembroke/</loc>
-    <lastmod>2026-04-07</lastmod>
+    <lastmod>2026-05-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.bivianomodularbuilders.com/norwell/</loc>
-    <lastmod>2026-04-07</lastmod>
+    <lastmod>2026-05-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.bivianomodularbuilders.com/hingham/</loc>
-    <lastmod>2026-04-07</lastmod>
+    <lastmod>2026-05-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
