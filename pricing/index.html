@@ -16,13 +16,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Modular Home Pricing Plymouth County MA | What Does BMB Cost? | Biviano Modular Builders</title>
-  <meta name="description" content="Real modular home pricing for Plymouth County, MA. Biviano Modular Builders: ~$300/sq ft, 8–12 weeks. See sample budget ranges and compare to stick-built quotes.">
+  <meta name="description" content="Real modular home pricing for Plymouth County, MA. Biviano Modular Builders: ~$250/sq ft, 8–12 weeks. See sample budget ranges and compare to stick-built quotes.">
   <meta name="keywords" content="modular home pricing Plymouth County MA, how much does a modular home cost Massachusetts, modular home cost per square foot, BMB pricing, affordable custom homes South Shore MA">
   <link rel="canonical" href="https://www.bivianomodularbuilders.com/pricing/">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Modular Home Pricing Plymouth County MA | Biviano Modular Builders">
-  <meta property="og:description" content="Real modular home pricing for Plymouth County, MA. ~$300/sq ft, 8–12 weeks. See sample budget ranges and compare to stick-built quotes.">
+  <meta property="og:description" content="Real modular home pricing for Plymouth County, MA. ~$250/sq ft, 8–12 weeks. See sample budget ranges and compare to stick-built quotes.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.bivianomodularbuilders.com/pricing/">
   <meta property="og:image" content="https://images.unsplash.com/photo-1773415988379-36e8be2e5c3e?w=1200&q=80">
@@ -32,7 +32,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Modular Home Pricing Plymouth County MA | Biviano Modular Builders">
-  <meta name="twitter:description" content="~$300/sq ft. 8–12 weeks. Real pricing ranges with no hidden numbers. Plymouth County, MA.">
+  <meta name="twitter:description" content="~$250/sq ft. 8–12 weeks. Real pricing ranges with no hidden numbers. Plymouth County, MA.">
   <meta name="twitter:image" content="https://images.unsplash.com/photo-1773415988379-36e8be2e5c3e?w=1200&q=80">
 
   <!-- Fonts -->
@@ -48,7 +48,7 @@
     "name": "Biviano Modular Builders",
     "legalName": "Biviano General Contracting LLC",
     "url": "https://www.bivianomodularbuilders.com",
-    "description": "Plymouth County's 4th-generation modular home builder. Custom homes built in 8–12 weeks for ~$300/sq ft — approximately 25% less than traditional stick-built construction.",
+    "description": "Plymouth County's 4th-generation modular home builder. Custom homes built in 8–12 weeks for ~$250/sq ft — approximately 38% less than traditional stick-built construction.",
     "telephone": "+16176786446",
     "email": "mbiviano@hotmail.com",
     "address": {
@@ -246,15 +246,19 @@
     /* Mobile Menu Overlay */
     .mobile-menu {
       position: fixed;
-      top: 72px; left: 0; right: 0; bottom: 0;
+      top: 72px; left: 0; right: 0;
+      height: calc(100dvh - 72px);
+      max-height: calc(100dvh - 72px);
       background: var(--coal-mid);
       z-index: 99;
       display: flex;
       flex-direction: column;
-      padding: 40px 28px;
+      padding: 32px 28px calc(40px + env(safe-area-inset-bottom));
       transform: translateX(100%);
       transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
       overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
     }
     .mobile-menu.open { transform: translateX(0); }
     .mobile-menu a {
@@ -1535,6 +1539,51 @@
       line-height: 1.75;
     }
     .calc-input-row { margin-bottom: 24px; }
+    /* Town picker */
+    .calc-town-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .calc-town {
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      padding: 14px 12px;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+      transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+      text-align: center;
+    }
+    .calc-town:hover {
+      background: rgba(74,144,196,0.08);
+      border-color: rgba(74,144,196,0.45);
+      color: var(--white);
+    }
+    .calc-town.selected {
+      background: rgba(74,144,196,0.18);
+      border-color: var(--blue);
+      color: var(--white);
+      font-weight: 500;
+    }
+    .calc-town-other { grid-column: span 4; font-size: 13px; }
+    .calc-town-other-field { margin-bottom: 16px; }
+    .calc-town-err {
+      font-family: 'Outfit', sans-serif;
+      font-size: 12px;
+      color: #f87171;
+      margin: 4px 0 16px;
+      display: none;
+    }
+    @media (max-width: 700px) {
+      .calc-town-grid { grid-template-columns: repeat(2, 1fr); }
+      .calc-town-other { grid-column: span 2; }
+    }
     .calc-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -1766,7 +1815,7 @@
   <section class="stat-band">
     <div class="stat-band-inner">
       <div class="stat-band-main reveal">
-        <div class="stat-band-number">~$300</div>
+        <div class="stat-band-number">~$250</div>
         <div class="stat-band-unit">Per square foot</div>
       </div>
       <div class="reveal reveal-d1">
@@ -1788,10 +1837,40 @@
       </div>
 
       <div class="calc-card reveal reveal-d1">
-        <!-- Step 1 — Square footage -->
+        <!-- Step 1 — Town selection -->
         <div class="calc-step active" id="cStep1">
           <div class="calc-step-badge">
-            <span class="calc-pill">Step 1 of 2</span>
+            <span class="calc-pill">Step 1 of 3</span>
+            <span class="calc-step-label">Where are you building?</span>
+          </div>
+          <h3 class="calc-step-title">Where's Your Build Site?</h3>
+          <p class="calc-step-desc">Mike works across Plymouth County. Pick the town closest to your land — different towns have different permit timelines and site costs we factor in.</p>
+          <div class="calc-town-grid" role="radiogroup" aria-label="Build location">
+            <button type="button" class="calc-town" data-town="Marshfield">Marshfield</button>
+            <button type="button" class="calc-town" data-town="Scituate">Scituate</button>
+            <button type="button" class="calc-town" data-town="Humarock">Humarock</button>
+            <button type="button" class="calc-town" data-town="Duxbury">Duxbury</button>
+            <button type="button" class="calc-town" data-town="Hanover">Hanover</button>
+            <button type="button" class="calc-town" data-town="Pembroke">Pembroke</button>
+            <button type="button" class="calc-town" data-town="Norwell">Norwell</button>
+            <button type="button" class="calc-town" data-town="Hingham">Hingham</button>
+            <button type="button" class="calc-town calc-town-other" data-town="Other">Another Plymouth County town →</button>
+          </div>
+          <div class="calc-field calc-town-other-field" id="calcTownOtherField" style="display:none;">
+            <label class="calc-label" for="calcTownOther">Town name</label>
+            <input class="calc-input" id="calcTownOther" type="text" autocomplete="address-level2" placeholder="Plymouth, Kingston, Hull, etc.">
+          </div>
+          <div class="calc-town-err" id="calcTownErr">Please pick a town to continue.</div>
+          <div class="calc-btns">
+            <button id="calcGoStep2" class="btn-primary">Continue →</button>
+          </div>
+          <p class="calc-disclaimer">Don't see your town? Pick "Another Plymouth County town" and type it in — Mike serves the full South Shore.</p>
+        </div>
+
+        <!-- Step 2 — Square footage -->
+        <div class="calc-step" id="cStep2">
+          <div class="calc-step-badge">
+            <span class="calc-pill">Step 2 of 3</span>
             <span class="calc-step-label">Enter your square footage</span>
           </div>
           <h3 class="calc-step-title">Instant Modular Home Estimate</h3>
@@ -1805,15 +1884,16 @@
             </div>
           </div>
           <div class="calc-btns">
-            <button id="calcGoStep2" class="btn-primary">Get My Estimate →</button>
+            <button id="calcGoStep3" class="btn-primary">Get My Estimate →</button>
+            <button id="calcBackTown" class="calc-btn-back" type="button">← Back</button>
           </div>
           <p class="calc-disclaimer">Ballpark estimate only — land, utilities, permitting, septic/sewer, driveway, and site work are not included.</p>
         </div>
 
-        <!-- Step 2 — Contact info -->
-        <div class="calc-step" id="cStep2">
+        <!-- Step 3 — Contact info -->
+        <div class="calc-step" id="cStep3">
           <div class="calc-step-badge">
-            <span class="calc-pill">Step 2 of 2</span>
+            <span class="calc-pill">Step 3 of 3</span>
             <span class="calc-step-label">Where should we send your estimate?</span>
           </div>
           <h3 class="calc-step-title">Send Me My Estimate</h3>
@@ -1845,8 +1925,8 @@
           <p class="calc-disclaimer">By submitting, you agree we may contact you about your estimate. We don't spam.</p>
         </div>
 
-        <!-- Step 3 — Confirmation -->
-        <div class="calc-step" id="cStep3">
+        <!-- Step 4 — Confirmation -->
+        <div class="calc-step" id="cStep4">
           <div class="calc-confirm-icon">✓</div>
           <h3 class="calc-step-title">Estimate Requested</h3>
           <div class="calc-confirm-box">
@@ -2195,7 +2275,7 @@
 
       <div class="savings-stats reveal">
         <div class="savings-stat">
-          <div class="savings-stat-num">~$300</div>
+          <div class="savings-stat-num">~$250</div>
           <div class="savings-stat-label">Per sq ft<br>BMB modular</div>
         </div>
         <div class="savings-stat">
@@ -2453,6 +2533,7 @@
       const DECK = 25000;
 
       function $(id) { return document.getElementById(id); }
+      function $$(sel, root) { return Array.from((root || document).querySelectorAll(sel)); }
 
       function digitsOnly(v) { return String(v || '').replace(/\D/g, ''); }
       function isValidEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(v).trim()); }
@@ -2467,9 +2548,39 @@
       }
 
       function showStep(n) {
-        ['cStep1','cStep2','cStep3'].forEach((id, i) => {
-          $(id).classList.toggle('active', i === n - 1);
+        ['cStep1','cStep2','cStep3','cStep4'].forEach((id, i) => {
+          const el = $(id);
+          if (el) el.classList.toggle('active', i === n - 1);
         });
+      }
+
+      /* Town picker */
+      let selectedTown = '';
+      const townButtons = $$('.calc-town');
+      const townOtherField = $('calcTownOtherField');
+      const townOtherInput = $('calcTownOther');
+      const townErr = $('calcTownErr');
+
+      townButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          townButtons.forEach((b) => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          selectedTown = btn.dataset.town || '';
+          if (townErr) townErr.style.display = 'none';
+          const isOther = selectedTown === 'Other';
+          if (townOtherField) townOtherField.style.display = isOther ? 'flex' : 'none';
+          if (isOther && townOtherInput) {
+            setTimeout(() => townOtherInput.focus(), 0);
+          }
+        });
+      });
+
+      function getTown() {
+        if (selectedTown === 'Other') {
+          const v = (townOtherInput && townOtherInput.value || '').trim();
+          return v || 'Other (unspecified)';
+        }
+        return selectedTown;
       }
 
       const phoneEl = $('calcPhone');
@@ -2479,23 +2590,53 @@
         });
       }
 
-      const goBtn = $('calcGoStep2');
-      if (goBtn) {
-        goBtn.addEventListener('click', () => {
+      /* Step 1 → Step 2 (town → sf) */
+      const goStep2 = $('calcGoStep2');
+      if (goStep2) {
+        goStep2.addEventListener('click', () => {
+          if (!selectedTown) {
+            if (townErr) townErr.style.display = 'block';
+            return;
+          }
+          if (selectedTown === 'Other' && (!townOtherInput || !townOtherInput.value.trim())) {
+            if (townErr) {
+              townErr.textContent = 'Please type your town to continue.';
+              townErr.style.display = 'block';
+            }
+            return;
+          }
+          if (townErr) {
+            townErr.style.display = 'none';
+            townErr.textContent = 'Please pick a town to continue.';
+          }
+          showStep(2);
+          setTimeout(() => $('calcSf') && $('calcSf').focus(), 0);
+        });
+      }
+
+      /* Step 2 → Step 3 (sf → contact) */
+      const goStep3 = $('calcGoStep3');
+      if (goStep3) {
+        goStep3.addEventListener('click', () => {
           const sf = parseFloat($('calcSf').value);
           if (!sf || sf <= 0) {
             $('calcSfErr').style.display = 'block';
             return;
           }
           $('calcSfErr').style.display = 'none';
-          showStep(2);
+          showStep(3);
           setTimeout(() => $('calcFirstName') && $('calcFirstName').focus(), 0);
         });
       }
 
-      const backBtn = $('calcBack');
-      if (backBtn) backBtn.addEventListener('click', () => showStep(1));
+      /* Back navigation */
+      const backTownBtn = $('calcBackTown');
+      if (backTownBtn) backTownBtn.addEventListener('click', () => showStep(1));
 
+      const backBtn = $('calcBack');
+      if (backBtn) backBtn.addEventListener('click', () => showStep(2));
+
+      /* Submit */
       const submitBtn = $('calcSubmit');
       if (submitBtn) {
         submitBtn.addEventListener('click', async () => {
@@ -2512,19 +2653,33 @@
           submitBtn.textContent = 'Sending…';
 
           const sf = Math.max(0, parseFloat($('calcSf').value) || 0);
+          const town = getTown();
           const homeCost = sf * RATE_PER_SF;
           const totalEstimate = homeCost + FOUNDATION + DECK;
+          const firstName = $('calcFirstName').value.trim();
+          const lastName = $('calcLastName').value.trim();
 
           const payload = {
+            firstName,
+            lastName,
+            email,
+            phone,
+            customField: {
+              'contact.bmb_town': town,
+              'contact.bmb_home_size': sf ? String(sf) : ''
+            },
+            source: 'BMB Website — Pricing Calculator',
+            tags: ['bmb-website', 'pricing-calculator'],
             lead: {
-              firstName: $('calcFirstName').value.trim(),
-              lastName: $('calcLastName').value.trim(),
+              firstName,
+              lastName,
               email,
               phone,
-              phoneDigits: digitsOnly(phone)
+              phoneDigits: digitsOnly(phone),
+              town
             },
             calculator: {
-              inputs: { squareFootage: sf },
+              inputs: { squareFootage: sf, town },
               assumptions: { homeRatePerSf: RATE_PER_SF, foundationStandard: FOUNDATION, deckStandard: DECK },
               totals: { homeCost, foundationCost: FOUNDATION, deckCost: DECK, totalEstimate }
             },
@@ -2536,7 +2691,7 @@
           };
 
           $('calcConfirmEmail').textContent = email;
-          showStep(3);
+          showStep(4);
 
           try {
             await fetch(CALC_WEBHOOK, {

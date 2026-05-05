@@ -97,7 +97,7 @@
         "name": "Are modular homes cheaper than traditional stick-built construction?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes — significantly. Modular homes run approximately $300 per square foot versus $400–$600 per square foot for traditional stick-built construction in Plymouth County. Most BMB families save $200,000–$300,000 compared to stick-built quotes."
+          "text": "Yes — significantly. Modular homes run approximately $250 per square foot versus $400–$600 per square foot for traditional stick-built construction in Plymouth County. Most BMB families save $200,000–$300,000 compared to stick-built quotes."
         }
       },
       {
@@ -304,15 +304,19 @@
     /* Mobile Menu Overlay */
     .mobile-menu {
       position: fixed;
-      top: 72px; left: 0; right: 0; bottom: 0;
+      top: 72px; left: 0; right: 0;
+      height: calc(100dvh - 72px);
+      max-height: calc(100dvh - 72px);
       background: var(--coal-mid);
       z-index: 99;
       display: flex;
       flex-direction: column;
-      padding: 40px 28px;
+      padding: 32px 28px calc(40px + env(safe-area-inset-bottom));
       transform: translateX(100%);
       transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
       overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
     }
     .mobile-menu.open { transform: translateX(0); }
     .mobile-menu a {
@@ -526,6 +530,56 @@
     }
     .btn-ghost:hover { color: var(--white); gap: 18px; }
     .btn-ghost::after { content: '→'; }
+
+    /* Prominent secondary CTA — homepage estimator */
+    .btn-estimator {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 24px;
+      background: rgba(74,144,196,0.08);
+      border: 1px solid rgba(74,144,196,0.55);
+      color: var(--white);
+      text-decoration: none;
+      transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+    }
+    .btn-estimator:hover {
+      background: rgba(74,144,196,0.18);
+      border-color: var(--blue);
+      transform: translateY(-1px);
+    }
+    .btn-estimator-icon {
+      width: 38px; height: 38px;
+      display: grid; place-items: center;
+      background: var(--blue);
+      color: var(--coal);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 0.04em;
+      flex-shrink: 0;
+    }
+    .btn-estimator-text { display: flex; flex-direction: column; gap: 2px; line-height: 1.1; }
+    .btn-estimator-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 19px;
+      letter-spacing: 0.08em;
+      color: var(--white);
+    }
+    .btn-estimator-sub {
+      font-family: 'Outfit', sans-serif;
+      font-size: 12px;
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.6);
+    }
+    .btn-estimator-arrow {
+      margin-left: auto;
+      color: var(--blue);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      transition: transform 0.25s ease;
+    }
+    .btn-estimator:hover .btn-estimator-arrow { transform: translateX(4px); }
 
     /* ─────────────────────────────
        MARQUEE
@@ -924,16 +978,55 @@
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       gap: 2px;
+      position: relative;
+      padding-top: 48px;
+    }
+    /* Timeline rail — horizontal on desktop */
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      top: 14px;
+      left: 7%;
+      right: 7%;
+      height: 1px;
+      background: rgba(255,255,255,0.08);
+      z-index: 0;
     }
     .p-step {
       background: var(--coal-mid);
       padding: 40px 28px;
       border-top: 2px solid transparent;
       transition: border-color 0.3s ease, background 0.3s ease;
+      position: relative;
     }
     .p-step:hover {
       border-color: var(--blue);
       background: var(--coal-light);
+    }
+    .p-step-marker {
+      position: absolute;
+      top: -42px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 16px;
+      height: 16px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .p-step-dot {
+      display: block;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--coal);
+      border: 1px solid rgba(255,255,255,0.22);
+      transition: background 0.45s ease, border-color 0.45s ease, transform 0.45s ease, box-shadow 0.45s ease;
+    }
+    .p-step.activated .p-step-dot {
+      background: var(--blue);
+      border-color: var(--blue);
+      transform: scale(1.18);
+      box-shadow: 0 0 0 6px rgba(74,144,196,0.18);
     }
     .p-step-num {
       font-family: 'Bebas Neue', sans-serif;
@@ -942,6 +1035,17 @@
       color: rgba(255,255,255,0.05);
       line-height: 1;
       margin-bottom: 16px;
+      transition: color 0.45s ease;
+    }
+    .p-step.activated .p-step-num {
+      color: rgba(74,144,196,0.32);
+    }
+    /* Confetti canvas overlay */
+    #processConfetti {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 5;
     }
     .p-step-title {
       font-family: 'Bebas Neue', sans-serif;
@@ -1521,7 +1625,27 @@
     ───────────────────────────── */
     @media (max-width: 1100px) {
       .adv-tiles { grid-template-columns: repeat(2, 1fr); }
-      .process-steps { grid-template-columns: repeat(3, 1fr); }
+      .process-steps {
+        grid-template-columns: 1fr;
+        padding-top: 0;
+        padding-left: 44px;
+        gap: 0;
+      }
+      .process-steps::before {
+        top: 0;
+        bottom: 0;
+        left: 22px;
+        right: auto;
+        width: 1px;
+        height: auto;
+      }
+      .p-step { border-top: none; border-left: 2px solid transparent; }
+      .p-step:hover { border-left-color: var(--blue); border-top: none; }
+      .p-step-marker {
+        top: 44px;
+        left: -33px;
+        transform: none;
+      }
       .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
     }
 
@@ -1567,7 +1691,6 @@
 
       .process-section { padding: 80px 24px; }
       .process-top { grid-template-columns: 1fr; gap: 24px; }
-      .process-steps { grid-template-columns: 1fr 1fr; }
 
       .test-section { padding: 80px 24px; }
       .test-top { flex-direction: column; align-items: flex-start; gap: 24px; }
@@ -1596,7 +1719,6 @@
       .split-facts { grid-template-columns: 1fr 1fr; gap: 20px; }
       .split-fact-num { font-size: 40px; }
       .cred-item { flex: 1 1 50%; }
-      .process-steps { grid-template-columns: 1fr; }
       .form-row { grid-template-columns: 1fr; }
       .footer-top { grid-template-columns: 1fr; }
       .footer-lic { font-size: 10px; }
@@ -1934,7 +2056,14 @@
     <div class="hero-bottom-cell">
       <div class="hero-cta-group">
         <a href="#consult" class="btn-primary">Schedule Free Consultation</a>
-        <a href="/pricing/#calculator" class="btn-ghost">Get a Quick Estimate</a>
+        <a href="/pricing/#calculator" class="btn-estimator" aria-label="Try our cost estimator — get a ballpark in 30 seconds">
+          <span class="btn-estimator-icon" aria-hidden="true">$</span>
+          <span class="btn-estimator-text">
+            <span class="btn-estimator-title">Try Our Estimator</span>
+            <span class="btn-estimator-sub">See your ballpark in 30 seconds</span>
+          </span>
+          <span class="btn-estimator-arrow" aria-hidden="true">→</span>
+        </a>
       </div>
     </div>
   </div>
@@ -2111,7 +2240,7 @@
       <div class="adv-tile-num" aria-hidden="true">02</div>
       <svg class="adv-tile-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M8 34l14-24 14 24H8z"/><path d="M14 34V24M30 34V24M22 34V18"/></svg>
       <h3 class="adv-tile-title">Save $200K–$300K</h3>
-      <p class="adv-tile-desc">At $300/sq ft versus $400–$600 for stick-built in Plymouth County, most families save $200,000–$300,000 compared to the quotes they were receiving. Same dream home — a quarter-million dollars less.</p>
+      <p class="adv-tile-desc">At $250/sq ft versus $400–$600 for stick-built in Plymouth County, most families save $200,000–$300,000 compared to the quotes they were receiving. Same dream home — a quarter-million dollars less.</p>
     </div>
     <div class="adv-tile reveal reveal-d2">
       <div class="adv-tile-num" aria-hidden="true">03</div>
@@ -2177,28 +2306,34 @@
       <p class="process-top-right">Your path to a BMB home is clear, collaborative, and always on your terms. Mike guides every decision from the first conversation to move-in day — with full transparency and zero surprises at every step.</p>
     </div>
 
-    <div class="process-steps reveal reveal-d1">
-      <div class="p-step">
+    <div class="process-steps reveal reveal-d1" id="processSteps">
+      <canvas id="processConfetti" aria-hidden="true"></canvas>
+      <div class="p-step" data-step="1">
+        <span class="p-step-marker" aria-hidden="true"><span class="p-step-dot"></span></span>
         <div class="p-step-num" aria-hidden="true">01</div>
         <h3 class="p-step-title">Free Design Consultation</h3>
         <p class="p-step-desc">60 minutes with Mike. Share your vision, budget, and timeline. Walk away with a custom roadmap and your personalized Cost Breakdown Report — at zero obligation. Only 8 slots per month.</p>
       </div>
-      <div class="p-step">
+      <div class="p-step" data-step="2">
+        <span class="p-step-marker" aria-hidden="true"><span class="p-step-dot"></span></span>
         <div class="p-step-num" aria-hidden="true">02</div>
         <h3 class="p-step-title">Design &amp; Lock Your Price</h3>
         <p class="p-step-desc">Custom floor plans drafted for ~$2,500 — versus $20–30K for traditional architectural plans. Your all-in price and 8–12 week build timeline are locked in writing with zero hidden costs or surprise fees.</p>
       </div>
-      <div class="p-step">
+      <div class="p-step" data-step="3">
+        <span class="p-step-marker" aria-hidden="true"><span class="p-step-dot"></span></span>
         <div class="p-step-num" aria-hidden="true">03</div>
         <h3 class="p-step-title">Factory Build + Site Prep</h3>
         <p class="p-step-desc">Your home is precision-built in a climate-controlled factory while Mike simultaneously handles all permits, site work, and foundation prep. Running in parallel — this is how we cut 9 months off the timeline.</p>
       </div>
-      <div class="p-step">
+      <div class="p-step" data-step="4">
+        <span class="p-step-marker" aria-hidden="true"><span class="p-step-dot"></span></span>
         <div class="p-step-num" aria-hidden="true">04</div>
         <h3 class="p-step-title">Crane Set &amp; Finish Work</h3>
         <p class="p-step-desc">Modules arrive on-site and are craned onto your foundation — wood-driven piles in flood zones or poured concrete on standard lots — in a single day. Mike's crew completes all finish work, utility connections, and coordinates every required inspection through certificate of occupancy.</p>
       </div>
-      <div class="p-step">
+      <div class="p-step" data-step="5" data-keys-in-hand="true">
+        <span class="p-step-marker" aria-hidden="true"><span class="p-step-dot"></span></span>
         <div class="p-step-num" aria-hidden="true">05</div>
         <h3 class="p-step-title">Move Into Your Forever Home</h3>
         <p class="p-step-desc">Keys in hand in 8–12 weeks. No delays. No nightmares. No contractor juggling. Just your dream home — on schedule, on budget — while neighbors with stick-built projects wait another full year.</p>
@@ -2443,7 +2578,7 @@
         <span class="faq-icon" aria-hidden="true">+</span>
       </button>
       <div class="faq-a" role="region">
-        <p class="faq-a-inner">Yes — significantly. Modular homes run approximately $300 per square foot versus $400–$600 per square foot for traditional stick-built construction in Plymouth County. For a 2,500 sq ft home, that's a potential difference of $250,000–$750,000. Most BMB families save $200,000–$300,000 compared to the stick-built quotes they were receiving. Factory efficiency, controlled material costs, and faster build timelines all drive those savings.</p>
+        <p class="faq-a-inner">Yes — significantly. Modular homes run approximately $250 per square foot versus $400–$600 per square foot for traditional stick-built construction in Plymouth County. For a 2,500 sq ft home, that's a potential difference of $375,000–$875,000. Most BMB families save $200,000–$300,000 compared to the stick-built quotes they were receiving. Factory efficiency, controlled material costs, and faster build timelines all drive those savings.</p>
       </div>
     </div>
 
@@ -2503,7 +2638,7 @@
         <span class="faq-icon" aria-hidden="true">+</span>
       </button>
       <div class="faq-a" role="region">
-        <p class="faq-a-inner">Approximately $300 per square foot — all-in, covering design, permits, site work, foundation, factory build, crane set, finish work, and final inspection. Compare that to $400–$600/sq ft for traditional stick-built construction in Plymouth County. For reference: a 2,500 sq ft home with BMB runs approximately $750,000 versus $1,000,000–$1,500,000 from traditional contractors. Your free consultation includes a personalized Cost Breakdown Report showing your exact numbers side-by-side.</p>
+        <p class="faq-a-inner">Approximately $250 per square foot — all-in, covering design, permits, site work, foundation, factory build, crane set, finish work, and final inspection. Compare that to $400–$600/sq ft for traditional stick-built construction in Plymouth County. For reference: a 2,500 sq ft home with BMB runs approximately $625,000 versus $1,000,000–$1,500,000 from traditional contractors. Your free consultation includes a personalized Cost Breakdown Report showing your exact numbers side-by-side.</p>
       </div>
     </div>
   </div>
@@ -2757,6 +2892,59 @@
       success.style.display = 'block';
     });
   }
+
+  /* ── Process timeline: dot activation + confetti finale ── */
+  (function () {
+    const stepsContainer = document.getElementById('processSteps');
+    if (!stepsContainer) return;
+    const steps = stepsContainer.querySelectorAll('.p-step');
+    if (!steps.length) return;
+
+    let confettiFired = false;
+    const prefersReducedMotion = window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function fireConfetti() {
+      if (confettiFired || prefersReducedMotion) return;
+      confettiFired = true;
+      if (typeof window.confetti !== 'function') return;
+      const canvas = document.getElementById('processConfetti');
+      const myConfetti = canvas
+        ? window.confetti.create(canvas, { resize: true, useWorker: true })
+        : window.confetti;
+      const colors = ['#4A90C4', '#3A7EBF', '#BBA898', '#E8DDD5', '#FFFFFF'];
+      const burst = (originX) => {
+        myConfetti({
+          particleCount: 90,
+          spread: 75,
+          startVelocity: 38,
+          ticks: 220,
+          origin: { x: originX, y: 0.7 },
+          colors,
+          scalar: 0.95,
+          gravity: 0.9,
+          disableForReducedMotion: true
+        });
+      };
+      burst(0.5);
+      setTimeout(() => burst(0.25), 180);
+      setTimeout(() => burst(0.75), 320);
+    }
+
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('activated');
+        if (entry.target.dataset.keysInHand === 'true') {
+          setTimeout(fireConfetti, 350);
+        }
+        obs.unobserve(entry.target);
+      });
+    }, { threshold: 0.45, rootMargin: '0px 0px -10% 0px' });
+
+    steps.forEach((step) => obs.observe(step));
+  })();
 </script>
+<script defer src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 </body>
 </html>
