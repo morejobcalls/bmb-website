@@ -2561,6 +2561,27 @@
       const townOtherInput = $('calcTownOther');
       const townErr = $('calcTownErr');
 
+      function advanceFromTown() {
+        if (!selectedTown) {
+          if (townErr) townErr.style.display = 'block';
+          return false;
+        }
+        if (selectedTown === 'Other' && (!townOtherInput || !townOtherInput.value.trim())) {
+          if (townErr) {
+            townErr.textContent = 'Please type your town to continue.';
+            townErr.style.display = 'block';
+          }
+          return false;
+        }
+        if (townErr) {
+          townErr.style.display = 'none';
+          townErr.textContent = 'Please pick a town to continue.';
+        }
+        showStep(2);
+        setTimeout(() => $('calcSf') && $('calcSf').focus(), 0);
+        return true;
+      }
+
       townButtons.forEach((btn) => {
         btn.addEventListener('click', () => {
           townButtons.forEach((b) => b.classList.remove('selected'));
@@ -2569,9 +2590,12 @@
           if (townErr) townErr.style.display = 'none';
           const isOther = selectedTown === 'Other';
           if (townOtherField) townOtherField.style.display = isOther ? 'flex' : 'none';
-          if (isOther && townOtherInput) {
-            setTimeout(() => townOtherInput.focus(), 0);
+          if (isOther) {
+            if (townOtherInput) setTimeout(() => townOtherInput.focus(), 0);
+            return;
           }
+          // Auto-advance for the 8 named towns — gives user a beat to see selection state
+          setTimeout(advanceFromTown, 220);
         });
       });
 
@@ -2590,27 +2614,14 @@
         });
       }
 
-      /* Step 1 → Step 2 (town → sf) */
+      /* Step 1 → Step 2 (town → sf) — Continue button (also handles "Other" path) */
       const goStep2 = $('calcGoStep2');
-      if (goStep2) {
-        goStep2.addEventListener('click', () => {
-          if (!selectedTown) {
-            if (townErr) townErr.style.display = 'block';
-            return;
-          }
-          if (selectedTown === 'Other' && (!townOtherInput || !townOtherInput.value.trim())) {
-            if (townErr) {
-              townErr.textContent = 'Please type your town to continue.';
-              townErr.style.display = 'block';
-            }
-            return;
-          }
-          if (townErr) {
-            townErr.style.display = 'none';
-            townErr.textContent = 'Please pick a town to continue.';
-          }
-          showStep(2);
-          setTimeout(() => $('calcSf') && $('calcSf').focus(), 0);
+      if (goStep2) goStep2.addEventListener('click', advanceFromTown);
+
+      /* Pressing Enter inside the "Other" town field also advances */
+      if (townOtherInput) {
+        townOtherInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') { e.preventDefault(); advanceFromTown(); }
         });
       }
 
