@@ -24,8 +24,6 @@
 
 **Core mechanism:** "The 12-Week Dream Home System" — factory precision + site prep happen simultaneously, eliminating weather delays and contractor chaos.
 
-**Guarantee:** Your dream home in 12 weeks or we pay your rent until it's ready.
-
 **Proof/credentials:**
 - 21 five-star reviews (Birdeye)  
 - MA Construction Supervisor License CS-108728, 122033, 203862  
@@ -323,7 +321,6 @@ Any element with class `reveal` will fade-in-up on scroll. Add this CSS to new p
 | Stick-built arch plans | $20,000–$30,000 |
 | Reviews | 21 five-star reviews |
 | Experience | 40+ years, 4th generation |
-| Guarantee | Dream home in 12 weeks or we pay your rent |
 
 ## Top Objections to Address in Copy
 
