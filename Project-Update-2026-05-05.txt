@@ -1,0 +1,118 @@
+BIVIANO MODULAR BUILDERS — PROJECT UPDATE
+Date: May 5, 2026
+From: Spencer
+To: Mike Biviano Jr.
+
+================================================================
+WHERE WE'RE AT
+================================================================
+
+The website is LIVE at:
+   https://www.bivianomodularbuilders.com
+
+All 13 pages are built, deployed, and capturing leads. We're now
+into the backend work — analytics, CRM pipeline, and reporting.
+
+================================================================
+WHAT'S DONE
+================================================================
+
+WEBSITE (live and indexed)
+- Homepage with hero, "why BMB," process, social proof, towns,
+  testimonials, FAQ
+- Pricing page with 3-step estimate calculator (auto-pushes lead
+  to your CRM the moment they hit "Get my estimate")
+- Why Modular education page with your bio + credentials
+- Process page — 6-step build timeline + comparison table
+- Gallery (placeholder photos for now — see "waiting on you")
+- 8 town pages: Marshfield, Hanover, Pembroke, Duxbury, Norwell,
+  Hingham, Humarock, Scituate
+- 404 error page, robots.txt, sitemap (Google can crawl everything)
+
+COPY DECISIONS LOCKED IN
+- Planning Board references stripped from every page (per your call)
+- Replaced with: "40+ years local experience," "knows every
+  inspector personally," "lifelong Marshfield resident,"
+  "4th-generation contractor"
+- Foundation language: "wood-driven piles in flood zones or poured
+  concrete on standard lots"
+- Service area footers: Duxbury · Norwell · Hingham · Humarock
+  (Kingston + Hull removed)
+
+TODAY (May 5)
+- Google Analytics 4 installed across all 13 pages and pushed live.
+  Tracking ID: G-GW5Z0VVDEC. We'll start seeing real visitor data
+  within 24 hours.
+
+================================================================
+WHAT'S IN PROGRESS / THIS WEEK'S TIMELINE
+================================================================
+
+WED MAY 6 — CRM Pipeline + Lead Fields
+- Build the modular pipeline inside your CRM with the 6 stages:
+  New Lead → Discovery Call Booked → Site Visit Done →
+  Budget Range Agreed → LOI Signed → Contract Signed
+- Add custom lead fields so every inquiry gets tagged with:
+  square footage, town, lot status (own/searching/have land),
+  budget range, target start date, plant partner, source
+- Wire the calculator and consultation form to push these fields
+  automatically
+
+THU MAY 7 — Google Search Console + HTTPS
+- Submit the sitemap to Google so we get indexed faster
+- Verify HTTPS/SSL is locked in (currently waiting on GitHub to
+  finalize the certificate — should be done by week's end)
+
+FRI MAY 8 — Monthly Scorecard
+- Build a one-page monthly report: # leads, # discovery calls,
+  # site visits, # contracts, revenue
+- Pulls automatically from the CRM so you get a clean number
+  every month without us having to run it manually
+
+================================================================
+DEFERRED (intentionally, until the above is dialed in)
+================================================================
+
+- 8–12 week email/SMS nurture sequence for modular leads
+  (we'll build this once we've seen 30 days of real lead flow
+  so the messaging matches actual buyer behavior)
+- bivianocontracting.com updates (drone video + calculator on
+  the GC site) — separate project, will start once modular site
+  is fully producing
+
+================================================================
+WHAT WE NEED FROM YOU
+================================================================
+
+1. REAL PHOTOS (biggest one)
+   Current site uses stock placeholders in the gallery and social
+   proof sections. As soon as you can send:
+   - Set-day crane photos (the moment the modules drop)
+   - Finished exterior shots of completed builds
+   - Screenshots of the 3 Facebook posts we're using as social
+     proof: Joanne Keogh Humarock + 2 Marshfield spec homes
+   ...we'll swap them in same-day.
+
+2. CONFIRM CALCULATOR PRICING
+   Right now the calculator runs on:
+   - $250/sqft for the modular structure
+   - $70K for foundation
+   - $25K for deck
+   - Roughly $300/sqft all-in
+   Want to make sure these numbers are still accurate before we
+   push more traffic to the calculator. Can you eyeball and
+   confirm or correct?
+
+================================================================
+BOTTOM LINE
+================================================================
+
+Site is live and capturing leads. By Friday May 8 we'll have
+analytics running, CRM pipeline built, and your monthly reporting
+in place. After that the only things outstanding are real photos
+(from you) and the nurture sequence (which we hold on intentionally
+until we have 30 days of lead data).
+
+Any questions, fire them at me.
+
+— Spencer

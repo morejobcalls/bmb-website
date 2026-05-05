@@ -2504,7 +2504,8 @@
           customField: {
             'contact.bmb_home_size': form.homeSize.value,
             'contact.bmb_town': form.town.value,
-            'contact.bmb_project_description': form.description.value.trim()
+            'contact.bmb_project_description': form.description.value.trim(),
+            'contact.bmb_source': 'Consultation form'
           },
           source: 'BMB Website',
           tags: ['bmb-website', 'consultation-request']
@@ -2677,7 +2678,10 @@
             phone,
             customField: {
               'contact.bmb_town': town,
-              'contact.bmb_home_size': sf ? String(sf) : ''
+              'contact.bmb_home_size': sf ? String(sf) : '',
+              'contact.bmb_source': 'Calculator',
+              'contact.bmb_estimate_total': totalEstimate,
+              'contact.bmb_home_cost_calc': homeCost
             },
             source: 'BMB Website — Pricing Calculator',
             tags: ['bmb-website', 'pricing-calculator'],
