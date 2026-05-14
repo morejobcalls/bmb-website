@@ -557,16 +557,34 @@
     /* Timeline track */
     .timeline-track {
       position: relative;
+      --tl-progress: 0px;
+      --tl-end: 100%;
     }
     .timeline-track::before {
       content: '';
       position: absolute;
       left: 50%;
       top: 0;
-      bottom: 0;
+      height: var(--tl-end);
       width: 2px;
-      background: linear-gradient(to bottom, transparent, var(--blue) 8%, var(--blue) 92%, transparent);
+      background: linear-gradient(to bottom, transparent, rgba(74,144,196,0.18) 6%, rgba(74,144,196,0.18) 100%);
       transform: translateX(-50%);
+      z-index: 0;
+    }
+    /* Scroll-progress fill — bright blue trail that grows from top, capped at last bubble */
+    .timeline-track::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      width: 2px;
+      height: min(var(--tl-progress), var(--tl-end));
+      background: linear-gradient(to bottom, transparent, var(--blue) 12%, var(--blue) 100%);
+      transform: translateX(-50%);
+      box-shadow: 0 0 12px rgba(74,144,196,0.45);
+      transition: height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+      z-index: 0;
     }
 
     /* Individual step */
@@ -577,8 +595,15 @@
       align-items: center;
       margin-bottom: 80px;
       position: relative;
+      z-index: 2;
+      transition: opacity 0.5s ease;
     }
     .tl-step:last-child { margin-bottom: 0; }
+
+    /* Default dim state — comes alive on scroll */
+    .tl-step:not(.is-active):not(.is-completed) { opacity: 0.42; }
+    .tl-step.is-completed { opacity: 0.78; }
+    .tl-step.is-active { opacity: 1; }
 
     /* Step number bubble on the center line */
     .tl-center {
@@ -594,15 +619,32 @@
       height: 52px;
       border-radius: 50%;
       background: var(--coal);
-      border: 2px solid var(--blue);
+      border: 2px solid rgba(74,144,196,0.4);
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: 'Bebas Neue', sans-serif;
       font-size: 22px;
       letter-spacing: 0.04em;
-      color: var(--blue);
+      color: rgba(74,144,196,0.6);
       flex-shrink: 0;
+      position: relative;
+      z-index: 3;
+      transition: background 0.45s ease, border-color 0.45s ease, color 0.45s ease, box-shadow 0.45s ease, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .tl-step.is-completed .tl-bubble {
+      background: rgba(74,144,196,0.18);
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+    .tl-step.is-active .tl-bubble {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: var(--white);
+      transform: scale(1.12);
+      box-shadow:
+        0 0 0 6px rgba(74,144,196,0.12),
+        0 0 28px rgba(74,144,196,0.45);
     }
     .tl-step-timing {
       font-family: 'Outfit', sans-serif;
@@ -614,24 +656,177 @@
       margin-top: 8px;
       text-align: center;
       white-space: nowrap;
+      transition: color 0.4s ease;
     }
+    .tl-step.is-active .tl-step-timing { color: var(--blue); }
 
     /* Step card */
     .tl-card {
       background: var(--coal-mid);
       border: 1px solid var(--rule-dark);
-      border-left: 3px solid var(--blue);
+      border-left: 3px solid rgba(74,144,196,0.35);
       padding: 44px 40px;
       position: relative;
       overflow: hidden;
-      transition: background 0.3s ease;
+      transition:
+        background 0.4s ease,
+        border-color 0.4s ease,
+        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.5s ease;
     }
     .tl-card:hover { background: var(--coal-light); }
 
     /* Right-side cards (even steps) flip the border */
     .tl-step.right .tl-card {
       border-left: 1px solid var(--rule-dark);
-      border-right: 3px solid var(--blue);
+      border-right: 3px solid rgba(74,144,196,0.35);
+    }
+
+    /* Active card — lifts, glows, full blue accent rule */
+    .tl-step.is-active .tl-card {
+      background: var(--coal-light);
+      border-left-color: var(--blue);
+      transform: translateY(-6px);
+      box-shadow:
+        0 24px 48px -16px rgba(0,0,0,0.6),
+        0 0 0 1px rgba(74,144,196,0.18),
+        0 0 48px -8px rgba(74,144,196,0.22);
+    }
+    .tl-step.right.is-active .tl-card {
+      border-left-color: var(--rule-dark);
+      border-right-color: var(--blue);
+    }
+    .tl-step.is-completed .tl-card {
+      border-left-color: var(--blue);
+    }
+    .tl-step.right.is-completed .tl-card {
+      border-left-color: var(--rule-dark);
+      border-right-color: var(--blue);
+    }
+
+    /* Subtle shimmer sweep on the active card */
+    .tl-step.is-active .tl-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        110deg,
+        transparent 30%,
+        rgba(74,144,196,0.08) 50%,
+        transparent 70%
+      );
+      transform: translateX(-100%);
+      animation: tlShimmer 1.6s ease forwards;
+      pointer-events: none;
+    }
+    @keyframes tlShimmer {
+      to { transform: translateX(100%); }
+    }
+
+    /* ──── STEP 5 CELEBRATION ──── */
+    .tl-step.tl-final.is-active .tl-card {
+      border-left-color: #d4a44a;
+      box-shadow:
+        0 24px 64px -16px rgba(0,0,0,0.7),
+        0 0 0 1px rgba(212,164,74,0.32),
+        0 0 80px -8px rgba(212,164,74,0.28);
+    }
+    .tl-step.tl-final.right.is-active .tl-card {
+      border-left-color: var(--rule-dark);
+      border-right-color: #d4a44a;
+    }
+    .tl-step.tl-final.is-active .tl-bubble {
+      background: linear-gradient(135deg, var(--blue) 0%, #d4a44a 100%);
+      border-color: #d4a44a;
+      box-shadow:
+        0 0 0 8px rgba(212,164,74,0.14),
+        0 0 36px rgba(212,164,74,0.55);
+      animation: tlBubblePulse 1.8s ease-in-out infinite;
+    }
+    @keyframes tlBubblePulse {
+      0%, 100% {
+        box-shadow:
+          0 0 0 8px rgba(212,164,74,0.14),
+          0 0 36px rgba(212,164,74,0.55);
+      }
+      50% {
+        box-shadow:
+          0 0 0 14px rgba(212,164,74,0.06),
+          0 0 56px rgba(212,164,74,0.75);
+      }
+    }
+    .tl-step.tl-final.is-active .tl-card-title {
+      background: linear-gradient(120deg, #ffffff 0%, #fff5dc 50%, #ffffff 100%);
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: tlTitleShimmer 3s ease-in-out infinite;
+    }
+    @keyframes tlTitleShimmer {
+      0%, 100% { background-position: 200% 0; }
+      50% { background-position: -200% 0; }
+    }
+
+    /* Confetti burst — 14 particles fired from the bubble */
+    .tl-confetti {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      pointer-events: none;
+      z-index: 3;
+    }
+    .tl-step.tl-final.is-active .tl-confetti i {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 8px;
+      height: 8px;
+      opacity: 0;
+      transform: translate(-50%, -50%);
+      animation: tlConfetti 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .tl-step.tl-final.is-active .tl-confetti i:nth-child(1)  { background: var(--blue);   --tx:  140px; --ty: -100px; --rot:  280deg; animation-delay: 0.05s; }
+    .tl-step.tl-final.is-active .tl-confetti i:nth-child(2)  { background: #d4a44a;     --tx:  -90px; --ty: -130px; --rot: -200deg; animation-delay: 0.10s; }
+    .tl-step.tl-final.is-active .tl-confetti i:nth-child(3)  { background: #ffffff;     --tx:  170px; --ty:   30px; --rot:  360deg; animation-delay: 0.15s; }
+    .tl-step.tl-final.is-active .tl-confetti i:nth-child(4)  { background: var(--blue); --tx: -160px; --ty:  -40px; --rot: -340deg; animation-delay: 0.20s; }
+    .tl-step.tl-final.is-active .tl-confetti i:nth-child(5)  { background: #d4a44a;     --tx:   60px; --ty: -180px; --rot:  220deg; animation-delay: 0.00s; }
+    .tl-step.tl-final.is-active .tl-confetti i:nth-child(6)  { background: #ffffff;     --tx: -130px; --ty:   90px; --rot: -180deg; animation-delay: 0.25s; }
+    .tl-step.tl-final.is-active .tl-confetti i:nth-child(7)  { background: var(--blue); --tx:  120px; --ty:  110px; --rot:  300deg; animation-delay: 0.12s; }
+    .tl-step.tl-final.is-active .tl-confetti i:nth-child(8)  { background: #d4a44a;     --tx:  -40px; --ty: -160px; --rot: -260deg; animation-delay: 0.18s; }
+    .tl-step.tl-final.is-active .tl-confetti i:nth-child(9)  { background: var(--blue); --tx:  200px; --ty:  -60px; --rot:  240deg; animation-delay: 0.08s; }
+    .tl-step.tl-final.is-active .tl-confetti i:nth-child(10) { background: #ffffff;     --tx: -200px; --ty:   20px; --rot: -300deg; animation-delay: 0.30s; }
+    .tl-step.tl-final.is-active .tl-confetti i:nth-child(11) { background: #d4a44a;     --tx:   30px; --ty:  150px; --rot:  180deg; animation-delay: 0.22s; }
+    .tl-step.tl-final.is-active .tl-confetti i:nth-child(12) { background: var(--blue); --tx:  -70px; --ty:  170px; --rot: -220deg; animation-delay: 0.15s; }
+    .tl-step.tl-final.is-active .tl-confetti i:nth-child(13) { background: #ffffff;     --tx:   90px; --ty:  -90px; --rot:  340deg; animation-delay: 0.02s; }
+    .tl-step.tl-final.is-active .tl-confetti i:nth-child(14) { background: #d4a44a;     --tx: -110px; --ty: -110px; --rot: -160deg; animation-delay: 0.28s; }
+
+    @keyframes tlConfetti {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) rotate(0) scale(0.4);
+      }
+      15% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform:
+          translate(calc(-50% + var(--tx)), calc(-50% + var(--ty)))
+          rotate(var(--rot)) scale(1);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .tl-step, .tl-card, .tl-bubble { transition: none; }
+      .tl-step.is-active .tl-card::after,
+      .tl-step.tl-final.is-active .tl-bubble,
+      .tl-step.tl-final.is-active .tl-card-title,
+      .tl-step.tl-final.is-active .tl-confetti i {
+        animation: none;
+      }
     }
 
     /* Ghost step number behind card */
@@ -1199,7 +1394,8 @@
        RESPONSIVE — TABLET (≤1100px)
     ───────────────────────────── */
     @media (max-width: 1100px) {
-      .timeline-track::before { left: 32px; }
+      .timeline-track::before,
+      .timeline-track::after { left: 32px; }
       .tl-step {
         grid-template-columns: 1fr;
         grid-template-rows: auto auto;
@@ -1224,6 +1420,24 @@
         left: auto;
         right: -10px;
       }
+      /* On non-desktop, cards always readable — keep highlight subtle but never hide content */
+      .tl-step:not(.is-active):not(.is-completed),
+      .tl-step.is-completed { opacity: 1; }
+      .tl-step:not(.is-active) .tl-bubble {
+        background: rgba(74,144,196,0.18);
+        border-color: var(--blue);
+        color: var(--blue);
+      }
+      .tl-step:not(.is-active) .tl-card {
+        border-left-color: var(--blue);
+      }
+      .tl-step.right:not(.is-active) .tl-card {
+        border-left-color: var(--rule-dark);
+        border-right-color: var(--blue);
+      }
+      /* Active state on mobile: smaller lift, keep accent */
+      .tl-step.is-active .tl-card { transform: translateY(-2px); }
+      .tl-step.is-active .tl-bubble { transform: scale(1.08); }
       .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
       .stat-pills { flex-direction: row; }
     }
@@ -1266,23 +1480,59 @@
        RESPONSIVE — SMALL (≤600px)
     ───────────────────────────── */
     @media (max-width: 600px) {
-      .timeline-track::before { display: none; }
-      .tl-step { padding-left: 0; }
-      .tl-center {
-        position: static;
-        flex-direction: row;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 16px;
-        width: auto;
+      /* Preserve the timeline structure — vertical line + bubbles anchored to it.
+         Pull line/bubbles closer to the left edge and shrink sizes for mobile. */
+      .timeline-section { padding: 64px 20px; }
+      .timeline-track::before,
+      .timeline-track::after { left: 24px; }
+      .tl-step {
+        padding-left: 72px;
+        margin-bottom: 56px;
       }
-      .tl-step-timing { margin-top: 0; }
-      .tl-card { padding: 32px 24px; }
-      .tl-card-ghost-num { font-size: 100px; }
+      .tl-center { width: 48px; }
+      .tl-bubble {
+        width: 44px;
+        height: 44px;
+        font-size: 18px;
+      }
+      .tl-step-timing { font-size: 8px; letter-spacing: 0.16em; margin-top: 6px; }
+      .tl-card { padding: 28px 22px; }
+      .tl-card-overline { font-size: 8px; letter-spacing: 0.28em; }
+      .tl-card-title { font-size: 24px; line-height: 1.05; margin-bottom: 14px; }
+      .tl-card-body { font-size: 13px; line-height: 1.75; margin-bottom: 22px; }
+      .tl-card-ghost-num { font-size: 88px; top: -6px; right: -6px; }
+      .tl-step.right .tl-card-ghost-num { left: auto; right: -6px; }
+      .tl-resp-label { font-size: 7px; letter-spacing: 0.18em; padding: 3px 8px; }
+      .tl-resp-text { font-size: 11px; }
+      /* Lighter active lift on mobile */
+      .tl-step.is-active .tl-card {
+        transform: translateY(-3px);
+        box-shadow:
+          0 16px 32px -12px rgba(0,0,0,0.55),
+          0 0 0 1px rgba(74,144,196,0.18),
+          0 0 32px -8px rgba(74,144,196,0.20);
+      }
+      .tl-step.is-active .tl-bubble {
+        transform: scale(1.1);
+        box-shadow:
+          0 0 0 5px rgba(74,144,196,0.12),
+          0 0 22px rgba(74,144,196,0.45);
+      }
+      /* Confetti scaled down */
+      .tl-step.tl-final.is-active .tl-confetti i { width: 6px; height: 6px; }
       .form-row { grid-template-columns: 1fr; }
       .footer-top { grid-template-columns: 1fr; }
       .footer-lic { font-size: 10px; }
       .compare-col { padding: 32px 22px; }
+    }
+
+    /* Extra-small phones */
+    @media (max-width: 380px) {
+      .tl-step { padding-left: 64px; }
+      .tl-bubble { width: 40px; height: 40px; font-size: 16px; }
+      .timeline-track::before,
+      .timeline-track::after { left: 20px; }
+      .tl-card-title { font-size: 22px; }
     }
   </style>
 </head>
@@ -1498,7 +1748,7 @@
         </div>
 
         <!-- STEP 5 — LEFT -->
-        <div class="tl-step left reveal">
+        <div class="tl-step left reveal tl-final">
           <div class="tl-card">
             <div class="tl-card-ghost-num">5</div>
             <div class="tl-card-overline">Step 5 &nbsp;&middot;&nbsp; ~1–2 Weeks</div>
@@ -1518,6 +1768,10 @@
           <div class="tl-center">
             <div class="tl-bubble">5</div>
             <div class="tl-step-timing">1–2 wks</div>
+            <span class="tl-confetti" aria-hidden="true">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </span>
           </div>
           <div class="tl-empty"></div>
         </div>
@@ -1877,6 +2131,101 @@
         }
       });
     }
+  </script>
+
+  <!-- ═══════════════════════════════════════════
+       TIMELINE — SCROLL-DRIVEN HIGHLIGHTS
+  ═══════════════════════════════════════════ -->
+  <script>
+    (function () {
+      var track = document.querySelector('.timeline-track');
+      if (!track) return;
+      var steps = Array.prototype.slice.call(track.querySelectorAll('.tl-step'));
+      if (!steps.length) return;
+
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Pick the step whose center is closest to the visual anchor (40% from top of viewport).
+      // Anything above the active gets is-completed.
+      function setActiveByScroll() {
+        var anchor = window.innerHeight * 0.4;
+        var bestIdx = -1;
+        var bestDist = Infinity;
+
+        for (var i = 0; i < steps.length; i++) {
+          var r = steps[i].getBoundingClientRect();
+          var center = r.top + r.height / 2;
+          if (r.bottom < 0 || r.top > window.innerHeight) continue;
+          var d = Math.abs(center - anchor);
+          if (d < bestDist) {
+            bestDist = d;
+            bestIdx = i;
+          }
+        }
+
+        for (var j = 0; j < steps.length; j++) {
+          var el = steps[j];
+          var wasActive = el.classList.contains('is-active');
+          el.classList.remove('is-active', 'is-completed');
+          if (bestIdx === -1) continue;
+          if (j < bestIdx) {
+            el.classList.add('is-completed');
+          } else if (j === bestIdx) {
+            el.classList.add('is-active');
+            // Replay confetti only when newly activated (and only for final)
+            if (el.classList.contains('tl-final') && !wasActive && !reduceMotion) {
+              var confetti = el.querySelector('.tl-confetti');
+              if (confetti) {
+                // Force animation restart by cloning
+                var fresh = confetti.cloneNode(true);
+                confetti.parentNode.replaceChild(fresh, confetti);
+              }
+            }
+          }
+        }
+      }
+
+      // Compute where the track lines should END — at the center of the last bubble.
+      // This caps both the base line AND the scroll-progress fill so neither
+      // continues past Step 5.
+      function getEndOffset() {
+        var lastStep = steps[steps.length - 1];
+        var bubble = lastStep.querySelector('.tl-bubble');
+        if (!bubble) return track.getBoundingClientRect().height;
+        var trackRect = track.getBoundingClientRect();
+        var bubbleRect = bubble.getBoundingClientRect();
+        return (bubbleRect.top - trackRect.top) + (bubbleRect.height / 2);
+      }
+
+      function setTrackProgress() {
+        var trackRect = track.getBoundingClientRect();
+        var anchor = window.innerHeight * 0.5;
+        var endOffset = getEndOffset();
+        var pxFilled = Math.max(0, Math.min(
+          endOffset,
+          (anchor - trackRect.top)
+        ));
+        track.style.setProperty('--tl-progress', pxFilled + 'px');
+        track.style.setProperty('--tl-end', endOffset + 'px');
+      }
+
+      var ticking = false;
+      function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(function () {
+          setActiveByScroll();
+          setTrackProgress();
+          ticking = false;
+        });
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+      // Initial paint
+      setActiveByScroll();
+      setTrackProgress();
+    })();
   </script>
 
 </body>
