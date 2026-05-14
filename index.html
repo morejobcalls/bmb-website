@@ -446,6 +446,35 @@
       color: transparent;
     }
 
+    .hero-inline-cta {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-top: 32px;
+      opacity: 0;
+      animation: revealUp 0.7s ease 0.6s forwards;
+    }
+    .hero-inline-cta .btn-primary {
+      font-size: 14px;
+      padding: 18px 36px;
+    }
+    .hero-inline-cta .estimator-link {
+      font-family: 'Outfit', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.72);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.32);
+      padding-bottom: 4px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .hero-inline-cta .estimator-link:hover {
+      color: var(--white);
+      border-bottom-color: var(--blue);
+    }
+
     .hero-bottom-row {
       position: relative;
       z-index: 2;
@@ -2018,8 +2047,8 @@
 <section class="hero" aria-label="Hero section">
   <div class="hero-bg" aria-hidden="true">
     <img
-      src="https://images.unsplash.com/photo-1776794613474-5dad28ddd7de?w=1600&q=80&auto=format&fit=crop"
-      alt=""
+      src="/hero-home.jpg"
+      alt="Custom modular home built by Biviano Modular Builders in Plymouth County, MA"
       fetchpriority="high"
     >
   </div>
@@ -2035,6 +2064,10 @@
       <span class="accent">Homes.</span><br>
       <span class="outline">Built Faster. 25% Less.</span>
     </h1>
+    <div class="hero-inline-cta">
+      <a href="#consult" class="btn-primary">Schedule Free Consultation</a>
+      <a href="/pricing/#calculator" class="estimator-link">Try our estimator →</a>
+    </div>
   </div>
 
   <div class="hero-bottom-row">
