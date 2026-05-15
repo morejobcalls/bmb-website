@@ -451,8 +451,34 @@
     }
     h1.hero-headline .accent { color: var(--blue); }
     h1.hero-headline .outline {
-      -webkit-text-stroke: 1.5px rgba(255,255,255,0.7);
+      display: block;
+      font-size: 0.58em;
+      line-height: 1;
+      margin-top: 18px;
+      -webkit-text-stroke: 1.5px rgba(255,255,255,0.78);
       color: transparent;
+    }
+    h1.hero-headline .outline .em-25 {
+      position: relative;
+      display: inline-block;
+    }
+    h1.hero-headline .outline .em-25::after {
+      content: '';
+      position: absolute;
+      left: -1%;
+      right: -1%;
+      bottom: -0.14em;
+      height: 12px;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 8' preserveAspectRatio='none'><path d='M 6 4.5 C 70 2.5 240 2.5 314 3.8 C 240 6.3 70 6.3 6 4.5 Z' fill='%234A90C4'/></svg>");
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      transform-origin: left center;
+      animation: heroUnderline 1s cubic-bezier(0.4, 0, 0.2, 1) 0.85s both;
+      pointer-events: none;
+    }
+    @keyframes heroUnderline {
+      from { transform: scaleX(0); opacity: 0; }
+      to   { transform: scaleX(1); opacity: 1; }
     }
 
     .hero-inline-cta {
@@ -2071,7 +2097,7 @@
     <h1 class="hero-headline">
       Custom Modular<br>
       <span class="accent">Homes.</span><br>
-      <span class="outline">Built Faster. 25% Less.</span>
+      <span class="outline">Built Faster. <span class="em-25">25% Less.</span></span>
     </h1>
     <div class="hero-inline-cta">
       <a href="#consult" class="btn-primary">Schedule Free Consultation</a>
